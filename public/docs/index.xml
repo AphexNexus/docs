@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Docs on AphexNexus</title>
+		<link>http://localhost:1313/docs/docs/</link>
+		<description>Recent content in Docs on AphexNexus</description>
+		<generator>Hugo</generator>
+		<language>en-us</language>
+		
+		
+		
+		
+			<lastBuildDate>Tue, 20 Oct 2026 10:00:00 -0700</lastBuildDate>
+		
+			<atom:link href="http://localhost:1313/docs/docs/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>k8s Lab Intro</title>
+				<link>http://localhost:1313/docs/docs/k8s-lab-intro/</link>
+				<pubDate>Tue, 20 Oct 2026 10:00:00 -0700</pubDate>
+				<guid>http://localhost:1313/docs/docs/k8s-lab-intro/</guid>
+				<description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;While I have been using a managed k8s cluster through work, it was being managed by a different team. I wanted to stand up my own k8s cluster to learn how all of these pieces fit together. I felt this was fundamentally important to my career. I should have a reasonable understanding of the platform I interact with all the time.&lt;/p&gt;&#xA;&lt;div class=&#34;td-alert td-alert--md alert alert-note&#34; role=&#34;alert&#34;&gt;&lt;div class=&#34;td-alert-heading alert-heading&#34; role=&#34;heading&#34;&gt;Software versions&lt;/div&gt;&#xA;  &lt;div class=&#34;td-alert-body&#34;&gt;&#xA;    &lt;p&gt;Development in this space is moving very rapidly. While trying to follow other guides only months old, I was hitting out-of-date information.&#xA;That is part of the reason for this lab, to try and build something with the latest possible and bridge some of the gaps I&amp;rsquo;ve seen in online information.&lt;/p&gt;&#xA;    &lt;/div&gt;&#xA;&lt;/div&gt;</description>
+			</item>
+	</channel>
+</rss>

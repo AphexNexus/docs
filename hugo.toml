@@ -1,0 +1,59 @@
+baseURL = 'https://AphexNexus.github.io/docs/'
+locale = 'en-us'
+title = 'AphexNexus'
+[module]
+  proxy = "direct"
+  # uncomment line below for temporary local development of module
+  # replacements = "github.com/docsy/docsy/theme -> ../../docsy/theme"
+  [module.hugoVersion]
+    extended = true
+    min = "0.160.1"
+  [[module.imports]]
+    path = "github.com/docsy/docsy/theme"
+    disable = false
+[params.links]
+[[params.links.developer]]
+	name = "GitHub"
+	url = "https://github.com/AphexNexus"
+	icon = "fab fa-github"
+        desc = "Development takes place here!"
+[[params.links.developer]]
+	name = "Slack"
+	url = "https://aphexnexus.slack.com"
+	icon = "fab fa-slack"
+        desc = "Chat with other project developers"
+[[params.links.developer]]
+	name = "Developer mailing list"
+	url = "https://example.org/mail"
+	icon = "fa fa-envelope"
+        desc = "Discuss development issues around the project"
+[params.drawio]
+  enable = true
+[sitemap]
+  changefreq = "monthly"
+  filename = "sitemap.xml"
+  priority = 0.5
+[markup]
+  [markup.highlight]
+      style = "gruvbox"
+[markup.goldmark.renderHooks.image]
+  useEmbedded = "fallback"
+[[module.mounts]]
+  source = 'assets'
+  target = 'assets'
+
+[[module.mounts]]
+  source = 'static'
+  target = 'assets'
+[params]
+prism_syntax_highlighting = false
+  [params.ui]
+      navbar_theme = "dark"
+      showLightDarkModeMenu = true
+      sidebar_menu_compact = true
+      ul_show = 1
+      sidebar_menu_foldable = true
+      sidebar_cache_limit = 1000
+  [params.copyright]
+      authors = "Justin Desilets"
+      from_year = 2026
