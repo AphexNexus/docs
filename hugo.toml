@@ -35,7 +35,7 @@ title = 'AphexNexus'
   priority = 0.5
 [markup]
   [markup.highlight]
-      style = "gruvbox"
+      style = "native"
 [markup.goldmark.renderHooks.image]
   useEmbedded = "fallback"
 [[module.mounts]]

@@ -3,6 +3,8 @@ date = 2026-10-20T10:00:00-07:00
 title = "k8s Lab Intro"
 weight = 1
 type = "docs"
+categories = ["intro"]
+tags = ["k8s","intro","topology"]
 description = '''
 A brief overview of the k8s lab setup.
 '''
@@ -99,7 +101,7 @@ The router is a [Ubiquity UCG-Max](https://techspecs.ui.com/unifi/cloud-gateways
 * **BGP Advertisements:** Using [Cilium](https://docs.cilium.io/en/stable/) I am able to create Load Balancer IPs that are advertized to the router. This allows me to directly connect to the `172.16.0.0/16` subnet through the advertized routes. It is even possible to port-forward from the router to these advertised routes.
 * **[External DNS Unifi Webhook](https://github.com/home-operations/external-dns-unifi-webhook):** This is a webhook provider for the [`External DNS`](https://github.com/kubernetes-sigs/external-dns) CRD. You create an API Key on your router and then add it to a webhook config. Then when you supply the annotations like:
 
-   ```yaml {style=native}
+   ```yaml
     service:
       annotations:
         lbipam.cilium.io/ips: 172.16.0.101
@@ -108,8 +110,8 @@ The router is a [Ubiquity UCG-Max](https://techspecs.ui.com/unifi/cloud-gateways
 
   This will automatically trigger a webhook to create a DNS A record for the above hostname and IP. If you delete it, the record is cleaned up automatically.
 * **Automatic port-forwarding:** TODO Right now there are two separate projects that look like they can do the same thing. I have just hit the point where I can start to investigate these. The idea is that through service annotations, they will trigger webhooks to the Unifi Router to create a port-forward policy for the service you create. I will update this section when I've settled on a solution.
-  * **[unifi-port-forward](https://github.com/fiskhest/unifi-port-forward)**
-  * **[port-forwarding-controller](https://github.com/ljfranklin/port-forwarding-controller)** *Last commit was 8 years ago. Probably not going to use this one*
+  * **[`unifi-port-forward`](https://github.com/fiskhest/unifi-port-forward)**
+  * **[`port-forwarding-controller`](https://github.com/ljfranklin/port-forwarding-controller)** *Last commit was 8 years ago. Probably not going to use this one.*
 
 > [!TIP]
 > Just like in the above situation, you can often find multiple projects with overlapping functionality. It is important to look at how active these repositories are. One that's 8 years old without any activity is likely not going to have a broad adoption. This translates into fewer resources that will have used it and documented problems / solutions on sites like [Stackoverflow](https://stackoverflow.com/questions). This is something I always consider, especially if I'm going to find myself as the sole solution provider for the technology of choice.
