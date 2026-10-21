@@ -1,0 +1,15 @@
+/* 1. Import Hack Font via CDN */
+@import url('https://jsdelivr.net');
+
+/* 2. Override Bootstrap's monospace variable used by Docsy */
+$font-family-monospace: 'Hack', Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+/* 3. Explicitly target code blocks to enforce the font change */
+code,
+pre,
+kbd,
+samp,
+.chroma,            /* Docsy's default Chroma syntax highlighter wrapper */
+.highlight pre {    /* Markdown code blocks */
+  font-family: $font-family-monospace !important;
+}

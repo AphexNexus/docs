@@ -16,3 +16,18 @@ _site/
 # counterproductive to check this file into the repository.
 # Details at https://github.com/github/pages-gem/issues/768
 Gemfile.lock
+
+# Hugo build output (can be regenerated at any time)
+/public/
+
+# Generated resources (e.g., processed images, optimized assets)
+/resources/_gen/
+
+# Build lock file to prevent concurrent builds
+/.hugo_build.lock
+
+# Generated build statistics (often used for PurgeCSS/Tailwind)
+hugo_stats.json
+
+# Text editor local JS configuration
+/assets/jsconfig.json
