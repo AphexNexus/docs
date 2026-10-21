@@ -26,6 +26,12 @@ jobs:
         with:
           submodules: recursive # Important if you used Git submodules for Docsy
 
+      - name: Install Dart Sass
+        run: |
+          curl -LJO "https://github.com"
+          tar -xvf dart-sass-1.79.4-linux-x64.tar.gz
+          echo "$(pwd)/dart-sass" >> $GITHUB_PATH
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
