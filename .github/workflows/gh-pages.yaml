@@ -28,7 +28,7 @@ jobs:
 
       - name: Install Dart Sass
         run: |
-          curl -LJO "https://github.com"
+          curl -LJO "https://github.com/sass/dart-sass/releases/download/1.106.0/dart-sass-1.106.0-linux-x64.tar.gz"
           tar -xvf dart-sass-1.79.4-linux-x64.tar.gz
           echo "$(pwd)/dart-sass" >> $GITHUB_PATH
 
