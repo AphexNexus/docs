@@ -3,7 +3,7 @@ date = 2026-10-20T10:00:00-07:00
 title = "k8s Lab Intro"
 weight = 1
 type = "docs"
-categories = ["intro"]
+categories = ["intro","lab"]
 tags = ["k8s","intro","topology"]
 description = '''
 A brief overview of the k8s lab setup.
@@ -27,7 +27,7 @@ For any good lab, you need some kind of goal to build towards. That goal can kee
 
 ### Hardware
 
-* **Dell R740xd:** This is running TrueNAS Scale and is acting as my NAS for home. For this lab, I am using an NFS shares on it with the k8s cluster. I purchased it used before the AI boom.
+* **Dell R740xd:** This is running TrueNAS Scale and is acting as my NAS for home. For this lab, I am using NVMe-oF mounts on it with the k8s cluster. I purchased it used before the AI boom and now it's my generational wealth.
   * **Specs:**
     * **CPU:** 2 x Intel Xeon Platinum 8160 24-core @ 2.10 Ghz
     * **Memory:** 1 TB - 16 x 64 GB 2666 DDR4 ECC DIMMS
@@ -50,12 +50,12 @@ For any good lab, you need some kind of goal to build towards. That goal can kee
 
 ### Network
 
-* **Hypervisor/User:** 192.168.1.0/24
-* **Nodes:** 192.168.100.0/24
-  * Setup on VLAN 100, this is the entry point for all of my interaction with the k8s nodes.
-* **Pods:** 10.244.0.0/16
-* **Services:** 10.96.0.0/12
-* **Load Balancers:** 172.16.0.0/16
+* **Hypervisor/User:** `192.168.1.0/24`
+* **Nodes:** `192.168.100.0/24`
+  * Setup on `VLAN 100`, this is the entry point for all of my interaction with the k8s nodes.
+* **Pods:** `10.244.0.0/16`
+* **Services:** `10.96.0.0/12`
+* **Load Balancers:** `172.16.0.0/16`
 
 Below is a high level network diagram of the layout. See [Full Description](#full-description) for the exhaustive explanation to what is going on here.
 
@@ -68,17 +68,17 @@ Below is a high level network diagram of the layout. See [Full Description](#ful
     * A note about my implementation. I originally only started up one server, but was able to cobble together some parts and bring a second one up. This has me running them as two stand-alone hypervisors. From a lab perspective, I could have spun the VMs up on NFS or iSCSI, to allow for Live Migration, but I had a lot of disks. I figured might as well leverage that storage and save the network storage for the k8s PVCs.
 * **OS:**
   * **[Talos Linux](https://www.siderolabs.com/talos-linux):**
-    * **Version:** v1.14.2
+    * **Version:** `v1.14.2`
     * **Description:** It's an immutable and minimal OS that is purpose built with k8s running right out of the box. I chose this because I wanted to get the OS out of the way. I've configured enough servers that I didn't want to burn time tracking down sysconfig settings and debugging SELinux alerts.
 * **[Kubernetes](https://kubernetes.io/):**
-  * **Client Version:** v1.37.1
-  * **Kustomize Version:** v5.8.1
-  * **Server Version:** v1.37.0
+  * **Client Version:** `v1.37.1`
+  * **Kustomize Version:** `v5.8.1`
+  * **Server Version:** `v1.37.0`
 * **[k9s](https://k9scli.io/):**
-  **Version:** v0.51.0
+  **Version:** `v0.51.0`
   **Description:** This is an incredible tool for interacting with k8s clusters. I would consider this a must install CLI tool. It allows you to visualize so much cluster information at once it.
 * **[Helm](https://helm.sh/):**
-  * **Client Version:** v4.3.1
+  * **Client Version:** `v4.3.1`
   * **Description:** Helm is a package manager for k8s. It allows you to build up template workflows where you can apply a set of values to build out a deployment. You can also leverage exiting templates to install complete solution stacks.
 
   ![alt](/images/k9s.png)
@@ -115,3 +115,17 @@ The router is a [Ubiquity UCG-Max](https://techspecs.ui.com/unifi/cloud-gateways
 
 > [!TIP]
 > Just like in the above situation, you can often find multiple projects with overlapping functionality. It is important to look at how active these repositories are. One that's 8 years old without any activity is likely not going to have a broad adoption. This translates into fewer resources that will have used it and documented problems / solutions on sites like [Stackoverflow](https://stackoverflow.com/questions). This is something I always consider, especially if I'm going to find myself as the sole solution provider for the technology of choice.
+
+### Switch
+
+All of the servers in this arrangement are connected to the same [Unifi USW-Aggregation](https://techspecs.ui.com/unifi/switching/usw-aggregation?subcategory=all-switching) switch. For the money, this switch was a very reasonable choice for the lab. 8 x 10 Gbps SFP+ ports, rack mounted, and fanless. All the servers are using 10G Direct Attach Cables between their NICs and this switch. So far network throughput has not been an issue.
+
+> [!NOTE]
+> If you're looking to do 10 Gbps in a home lab, there are some budget offerings to get you going between Intel based NICs and switching. My recommendation would be to try and use SFP+ ports with DAC cables. SFP+ ports keep costs down compared to Base-T connections. Fiber modules can be very fussy and if everything is in the same room, it's just unneeded.
+
+### Servers
+
+I have three different servers in this setup that I have purchased used at different points in time. In general, each one was meant to be used as a NAS for home. Up until recently, used server hardware was a really good deal. A 2U server, with 6-12 LFF HHD bays gave you room for tons of storage and you could find spare parts all day long. There are still a lot of budget listings, it's just that RAM and even now HDD prices are starting to get silly. With that being said, I will lay out how my setup is working right now.
+
+* **Dell PowerEdge R740xd:**
+  * This one is a beast and it is being underutilized in the lab. I had originally bought it to build a k8s lab on, but life got busy and instead I finally moved it over to it's final purpose of being a very robust TrueNAS Scale server. Between the high core count and high memory capacity, it would make for an ideal Proxmox server to host a good number of `node` VMs. Instead, I have it setup with NVMe-oF persistent volumes to serve as my mount points for pod PVCs. This process is detailed in [Guides: NVMe-oF](./guides/nvme_of_pvc.md).
